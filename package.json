@@ -1,0 +1,17 @@
+{
+  "name": "moonchat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm install && npm ci --no-bin-links && node server.js"
+  },
+  "author": "mcguru",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.6.1",
+    "ws": "^8.13.0"
+  }
+}

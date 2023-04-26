@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Web</title>
+  </head>
+  <body>
+    <h1>Chat Web</h1>
+    <div id="messages"></div>
+    <form id="message-form">
+      <input type="text" id="message-input" placeholder="Écrire un message...">
+      <button type="submit">Envoyer</button>
+    </form>
+
+    <script>
+      const socket = new WebSocket("ws://localhost:8080");
+
+      // Écouter les messages envoyés par le serveur
+      socket.onmessage = (event) => {
+        const message = event.data;
+
+        // Ajouter le message à la liste des messages
+        const messages = document.getElementById("messages");
+        const li = document.createElement("li");
+        li.innerText = message;
+        messages.appendChild(li);
+      };
+
+      // Envoyer le message lorsque le formulaire est soumis
+      const messageForm = document.getElementById("message-form");
+      const messageInput = document.getElementById("message-input");
+      messageForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const message = messageInput.value;
+
+        // Envoyer le message au serveur
+        socket.send(message);
+
+        // Effacer le champ de saisie
+        messageInput.value = "";
+      });
+    </script>
+  </body>
+</html>
